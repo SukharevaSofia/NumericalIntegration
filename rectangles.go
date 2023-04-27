@@ -1,13 +1,15 @@
 package main
 
-import "math"
+import (
+	"math"
+)
 
-func rectLeft(n int, left, right, accuracy float64, eqt equation) (float64, float64) {
+func rectLeft(n int, left, right, accuracy float64, eqt equation) (float64, int, int) {
 	var sum, prevSum float64
 	n /= 2
 	sum, prevSum = 100, 2
-
-	for math.Abs(sum-prevSum) > math.Pow(10, -accuracy) {
+	it := 0
+	for runge(sum, prevSum, 1) > math.Pow(10, -accuracy) {
 		n *= 2
 		prevSum = sum
 		sum = 0
@@ -16,17 +18,18 @@ func rectLeft(n int, left, right, accuracy float64, eqt equation) (float64, floa
 			sum += countEqt(i, eqt)
 		}
 		sum *= h
+		it++
 	}
 
-	return round(sum, accuracy), math.Log2(float64(n))
+	return round(sum, accuracy), n, it
 }
 
-func rectRight(n int, left, right, accuracy float64, eqt equation) (float64, float64) {
+func rectRight(n int, left, right, accuracy float64, eqt equation) (float64, int, int) {
 	var sum, prevSum float64
 	n /= 2
 	sum, prevSum = 100, 2
-
-	for math.Abs(sum-prevSum) > math.Pow(10, -accuracy) {
+	it := 0
+	for runge(sum, prevSum, 1) > math.Pow(10, -accuracy) {
 		n *= 2
 		prevSum = sum
 		sum = 0
@@ -35,17 +38,19 @@ func rectRight(n int, left, right, accuracy float64, eqt equation) (float64, flo
 			sum += countEqt(i, eqt)
 		}
 		sum *= h
+		it++
 	}
 
-	return round(sum, accuracy), math.Log2(float64(n))
+	return round(sum, accuracy), n, it
 }
 
-func rectMid(n int, left, right, accuracy float64, eqt equation) (float64, float64) {
+func rectMid(n int, left, right, accuracy float64, eqt equation) (float64, int, int) {
 	var sum, prevSum float64
 	n /= 2
 	sum, prevSum = 100, 2
+	it := 0
+	for runge(sum, prevSum, 2) > math.Pow(10, -accuracy) {
 
-	for math.Abs(sum-prevSum) > math.Pow(10, -accuracy) {
 		n *= 2
 		prevSum = sum
 		sum = 0
@@ -54,7 +59,8 @@ func rectMid(n int, left, right, accuracy float64, eqt equation) (float64, float
 			sum += countEqt(i+h/2, eqt)
 		}
 		sum *= h
+		it++
 	}
 
-	return round(sum, accuracy), math.Log2(float64(n))
+	return round(sum, accuracy), n, it
 }

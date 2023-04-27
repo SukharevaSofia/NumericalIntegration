@@ -28,16 +28,19 @@ func main() {
 	}
 
 	fmt.Printf("Для функции %d:\nЛевый предел: %f, правый предел:%f, точность %d знака\n", fNumber, left, right, int(accuracy))
-	answL, iterL := rectLeft(4, left, right, accuracy, eq)
-	answR, iterR := rectRight(4, left, right, accuracy, eq)
-	answM, iterM := rectMid(4, left, right, accuracy, eq)
-	answT, iterT := trapeze(4, left, right, accuracy, eq)
-	answS, iterS := simpson(4, left, right, accuracy, eq)
-	fmt.Printf("Прямоугольники:\n-левые: %s, %d итераций\n-правые: %s, %d итераций\n-средние: %s, %d итераций\n",
-		strconv.FormatFloat(answL, 'f', int(accuracy), 64), int(iterL),
-		strconv.FormatFloat(answR, 'f', int(accuracy), 64), int(iterR),
-		strconv.FormatFloat(answM, 'f', int(accuracy), 64), int(iterM))
-	fmt.Printf("Трапеции: %s, %d итераций\n", strconv.FormatFloat(answT, 'f', int(accuracy), 64), int(iterT))
-	fmt.Printf("Метод Симпсона: %s, %d итераций\n", strconv.FormatFloat(answS, 'f', int(accuracy), 64), int(iterS))
+	answL, nL, iterL := rectLeft(4, left, right, accuracy, eq)
+	answR, nR, iterR := rectRight(4, left, right, accuracy, eq)
+	answM, nM, iterM := rectMid(4, left, right, accuracy, eq)
+	answT, nT, iterT := trapeze(4, left, right, accuracy, eq)
+	answS, nS, iterS := simpson(4, left, right, accuracy, eq)
+	fmt.Printf("Прямоугольники:\n-левые: %s, итераций %d, %d разбиений"+
+		"\n-правые: %s, итераций %d, %d разбиений\n-средние: %s,итераций %d, %d разбиений\n",
+		strconv.FormatFloat(answL, 'f', int(accuracy), 64), iterL, nL,
+		strconv.FormatFloat(answR, 'f', int(accuracy), 64), iterR, nR,
+		strconv.FormatFloat(answM, 'f', int(accuracy), 64), iterM, nM)
+	fmt.Printf("Трапеции: %s, итераций %d, %d разбиений\n",
+		strconv.FormatFloat(answT, 'f', int(accuracy), 64), iterT, nT)
+	fmt.Printf("Метод Симпсона: %s, итераций %d, %d разбиений\n",
+		strconv.FormatFloat(answS, 'f', int(accuracy), 64), iterS, nS)
 
 }
