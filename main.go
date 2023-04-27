@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 )
@@ -11,7 +12,7 @@ func main() {
 	var eq1, eq2, eq3, eq equation
 	eq1.cube, eq1.sqr, eq1.fst, eq1.zer = 2, -4, 6, -40
 	eq2.cube, eq2.sqr, eq2.fst, eq2.zer = 1, -3, 6, -19
-	eq3.cube, eq3.sqr, eq3.fst, eq3.zer = -3, -2, 5, 39
+	eq3.cube, eq3.sqr, eq3.fst, eq3.zer = -3, -2, math.Sin(5), 39
 
 	fNumber, left, right, accuracy := GetValues(eq1, eq2, eq3)
 
