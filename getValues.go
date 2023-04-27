@@ -68,20 +68,6 @@ func GetValues(eq1, eq2, eq3 equation) (int, float64, float64, float64) {
 		c *= 10
 	}
 
-	//var method int
-	//s = "Выберите метод интегрирования:\n" +
-	//	"1: Метод прямоугольников\n" +
-	//	"2: Метод трапеций\n" +
-	//	"3: Метод Симпсона"
-	//fmt.Println(s)
-	//for {
-	//	fmt.Scan(&method)
-	//	if (method == 1) || (method == 2) || (method == 3) {
-	//		break
-	//	}
-	//	fmt.Println("Введите 1, 2 или 3")
-	//	fmt.Print("Выбрать метод: ")
-	//}
 	a, _ := strconv.ParseFloat(left, 64)
 	b, _ := strconv.ParseFloat(right, 64)
 	return fNumber, a, b, acc
